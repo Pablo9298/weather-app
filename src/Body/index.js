@@ -2,10 +2,14 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import Map from './Map';
 import TimeSelector from './TimeSelector';
+import OffcanvasBtn from 'react-bootstrap/Button';
+
 import './body.scss';
 
 function Body() {
   return (
+    <>
+    <OffcanvasBtn />
     <Tabs
       defaultActiveKey="now"
       id="justify-tab-example"
@@ -21,6 +25,7 @@ function Body() {
         <Map />
       </Tab>
     </Tabs>
+    </>
   );
 }
 
