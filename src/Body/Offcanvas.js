@@ -10,7 +10,7 @@ function OffcanvasButton() {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button className='mb-3' variant="primary" onClick={handleShow}>
         Launch
       </Button>
 

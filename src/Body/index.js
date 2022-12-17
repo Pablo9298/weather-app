@@ -9,24 +9,22 @@ import './body.scss';
 function Body() {
   return (
     <>
-    <OffcanvasButton className="mb-3">
-      
-    </OffcanvasButton>
-    <Tabs
-      defaultActiveKey="now"
-      id="justify-tab-example"
-      className="mb-3"
-      justify
-    >
-      <Tab eventKey="now" title="Now">
-        <TimeSelector id="now" />
-        <Map />
-      </Tab>
-      <Tab eventKey="forcast" title="Forcast">
-        <TimeSelector id="forcast" />
-        <Map />
-      </Tab>
-    </Tabs>
+      <OffcanvasButton />
+      <Tabs
+        defaultActiveKey="now"
+        id="justify-tab-example"
+        className="mb-3"
+        justify
+      >
+        <Tab eventKey="now" title="Now">
+          <TimeSelector id="now" />
+          <Map />
+        </Tab>
+        <Tab eventKey="forcast" title="Forcast">
+          <TimeSelector id="forcast" />
+          <Map />
+        </Tab>
+      </Tabs>
     </>
   );
 }
