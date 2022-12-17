@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 
-function OffcanvasBtn() {
+function OffcanvasButton() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -26,4 +27,4 @@ function OffcanvasBtn() {
   );
 }
 
-render(<OffcanvasBtn />);
+export default OffcanvasButton;
