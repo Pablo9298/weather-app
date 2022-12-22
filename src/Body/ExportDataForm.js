@@ -9,7 +9,9 @@ function ExportDataForm(defaultProps) {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(event);
-  }
+
+    window.open().document.write(`Your choice data format ${event.target.mode.value}`);
+  };
 
   return (
     <Form onSubmit={handleSubmit}>
