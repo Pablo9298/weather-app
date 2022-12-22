@@ -1,23 +1,31 @@
-import { FormGroup } from 'react-bootstrap';
+import FormGroup from 'react-bootstrap/FormGroup';
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 function ExportDataForm(defaultProps) {
 
-  const modes = [
-    { code: 'xml', label: 'XML' },
-    { code: 'html', label: 'HTML' },
-    { code: 'JSON', label: 'JSON' },
-  ];
+  const modes = ["JSON", "XML", "HTML"];
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(event);
+  }
 
   return (
-    <FormGroup className="my-4">
-      <Form.Label>Modes</Form.Label>
-      <Form.Select name="modes" defaultValue={defaultProps.mode}>
-      {modes.map((mode, i) => (
-            <option key={mode.code} value={mode.code}>{mode.label}</option>
+    <Form onSubmit={handleSubmit}>
+      <FormGroup className="my-4">
+        <Form.Label>Modes</Form.Label>
+        <Form.Select name="mode" defaultValue={defaultProps.mode}>
+          {modes.map((mode) => (
+            <option key={mode} value={mode}>{mode}</option>
           ))}
-      </Form.Select>
-    </FormGroup>
+        </Form.Select>
+      </FormGroup>
+
+      <Button className="w-100" variant="primary" type="submit">
+        Submit
+      </Button>
+    </Form >
   );
 }
 
