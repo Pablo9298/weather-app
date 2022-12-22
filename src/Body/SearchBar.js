@@ -1,5 +1,6 @@
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import SearchForm from './SearchForm';
+import ExportDataForm from './ExportDataForm';
 
 function SearchBar({ show, handleClose }) {
   return (
@@ -9,6 +10,7 @@ function SearchBar({ show, handleClose }) {
       </Offcanvas.Header>
       <Offcanvas.Body>
         <SearchForm />
+        <ExportDataForm />
       </Offcanvas.Body>
     </Offcanvas>
   );
