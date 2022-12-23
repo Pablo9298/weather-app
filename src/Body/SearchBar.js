@@ -10,7 +10,7 @@ function SearchBar({ show, handleClose }) {
       </Offcanvas.Header>
       <Offcanvas.Body>
         <SearchForm />
-        <ExportDataForm />
+        <ExportDataForm  />
       </Offcanvas.Body>
     </Offcanvas>
   );
