@@ -1,10 +1,14 @@
+import { useState } from 'react';
 import FormGroup from 'react-bootstrap/FormGroup';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import FormLabel from 'react-bootstrap/FormLabel';
 import { getWeather, getForecast, defaultSearchParams } from '../services/apiService';
+import ErrorModal from '../ErrorModal';
 
 function ExportDataForm() {
+
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const modes = ["JSON", "XML", "HTML"];
   const endpoints = ['Current', 'Forecast']
@@ -17,7 +21,7 @@ function ExportDataForm() {
     const endpoint = event.target.endpoint.value;
 
     if (!endpoint) {
-      alert('Please choose endpoint');
+      setErrorMessage('Please choose endpoint');
       return;
     }
 
@@ -27,42 +31,51 @@ function ExportDataForm() {
       ...defaultSearchParams,
       mode,
     })
-    .then((response) => response.text())
-    .then((data) => window.open('about:blank').document.body.append(`Your choice data format ${data}`));
-
-  
-    // window.open().document.write(`Your choice data format ${event.target.mode.value}`);
+      .then((response) => response.text())
+      .then((data) => {
+        const objectData = JSON.parse(data);
+        if (objectData.cod !== 200) {
+          throw Error(objectData.message);
+        }
+        window.open('about:blank').document.body.append(data)
+      })
+      .catch((error) => {
+        setErrorMessage(error.message);
+      });
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <h5 className='my-5'>Export</h5>
-      <FormGroup className="my-4">
-        <FormLabel>Export type</FormLabel>
-        <Form.Select name="mode" defaultValue="JSON">
-          {modes.map((mode) => (
-            <option key={mode} value={mode}>{mode}</option>
+    <>
+      <Form onSubmit={handleSubmit}>
+        <h5 className='my-5'>Export</h5>
+        <FormGroup className="my-4">
+          <FormLabel>Export type</FormLabel>
+          <Form.Select name="mode" defaultValue="JSON">
+            {modes.map((mode) => (
+              <option key={mode} value={mode}>{mode}</option>
+            ))}
+          </Form.Select>
+        </FormGroup>
+
+        <FormGroup className='mt-4'>
+          <FormLabel>Endpoint</FormLabel>
+          {endpoints.map((endpoint) => (
+            <Form.Check
+              key={endpoint}
+              name="endpoint"
+              value={endpoint}
+              type="radio"
+              label={endpoint}
+            />
           ))}
-        </Form.Select>
-      </FormGroup>
+        </FormGroup>
 
-      <FormGroup className='mt-4'>
-        <FormLabel>Endpoint</FormLabel>
-        {endpoints.map((endpoint) => (
-          <Form.Check
-            key={endpoint}
-            name="endpoint"
-            value={endpoint}
-            type="radio"
-            label={endpoint}
-          />
-        ))}
-      </FormGroup>
-
-      <Button className="w-100 mt-4" variant="warning" type="submit">
-        Export
-      </Button>
-    </Form >
+        <Button className="w-100 mt-4" variant="warning" type="submit">
+          Export
+        </Button>
+      </Form >
+      <ErrorModal message={errorMessage} handleClose={() => setErrorMessage} />
+    </>
   );
 }
 
