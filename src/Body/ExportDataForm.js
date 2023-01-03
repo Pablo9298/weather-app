@@ -15,7 +15,6 @@ function ExportDataForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(event);
 
     const mode = event.target.mode.value;
     const endpoint = event.target.endpoint.value;
@@ -31,12 +30,12 @@ function ExportDataForm() {
       ...defaultSearchParams,
       mode,
     })
-      .then((response) => response.text())
-      .then((data) => {
-        const objectData = JSON.parse(data);
-        if (objectData.cod !== 200) {
+      .then(async (response) => {
+        if (!response.ok) {
+          const objectData = await response.json();
           throw Error(objectData.message);
         }
+        const data = await response.text();
         window.open('about:blank').document.body.append(data)
       })
       .catch((error) => {
@@ -51,8 +50,8 @@ function ExportDataForm() {
         <FormGroup className="my-4">
           <FormLabel>Export type</FormLabel>
           <Form.Select name="mode" defaultValue="JSON">
-            {modes.map((mode) => (
-              <option key={mode} value={mode}>{mode}</option>
+            {modes.map((type) => (
+              <option key={type} value={type}>{type}</option>
             ))}
           </Form.Select>
         </FormGroup>
