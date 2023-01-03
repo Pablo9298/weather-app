@@ -57,7 +57,7 @@ function SearchForm() {
             key={unit}
             name="units"
             value={unit}
-            defaultChecked={defaultSearchParams.unit === unit}
+            defaultChecked={defaultSearchParams.units === unit}
           />
         ))}
       </FormGroup>
