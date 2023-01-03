@@ -15,7 +15,7 @@ function Forecast() {
 
   return (
     <>
-      <TimeSelector id="forcast" />
+      <TimeSelector id="forecast" />
       <Map />
     </>
   );
