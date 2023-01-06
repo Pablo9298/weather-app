@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import Data from './Data';
@@ -13,7 +13,7 @@ function TimeSelector({ data }) {
 
   const [currentData, setCurrentData] = useState(null);
 
-  const getCurrentData = () => {
+  const getCurrentData = useCallback((cbFn) => {
     data?.list.forEach(item => {
       const timestamp = item.dt;
       const momentDate = moment.unix(timestamp);
@@ -21,23 +21,15 @@ function TimeSelector({ data }) {
       const day = momentDate.format('DD');
       const hour = momentDate.format('HH:mm');
 
-      if (selectedDay === day && selectedHour === hour) {
-        setCurrentData(item);
-      }
+      cbFn(item, day, hour);
     });
-  };
+  }, [data]);
 
   useEffect(() => {
     const days = [];
     const hours = [];
 
-    data?.list.forEach(item => {
-      const timestamp = item.dt;
-      const momentDate = moment.unix(timestamp);
-
-      const day = momentDate.format('DD');
-      const hour = momentDate.format('HH:mm');
-
+    getCurrentData((item, day, hour) => {
       if (!days.includes(day)) {
         days.push(day);
       }
@@ -47,62 +39,70 @@ function TimeSelector({ data }) {
       }
     });
 
-    setDays(days);
-    setHours(hours);
-    setSelectedDay(days[0]);
-    setSelectedHour(hours[0]);
-    if (data) {
-      setCurrentData(data.list[0]);
+  setDays(days);
+  setHours(hours);
+  setSelectedDay(days[0]);
+  setSelectedHour(hours[0]);
+  if (data) {
+    setCurrentData(data.list[0]);
+  }
+}, [data, getCurrentData]);
+
+const handleOnChangeDays = (event) => {
+  setSelectedDay(event.currentTarget.value);
+  getCurrentData((item, day, hour) => {
+    if (selectedDay === day && selectedHour === hour) {
+      setCurrentData(item);
     }
-  }, [data]);
+  });
+}
 
-  const handleOnChangeDays = (event) => {
-    setSelectedDay(event.currentTarget.value);
-    getCurrentData();
-  }
+const handleOnChangeHours = (event) => {
+  setSelectedHour(event.currentTarget.value);
+  getCurrentData((item, day, hour) => {
+    if (selectedDay === day && selectedHour === hour) {
+      setCurrentData(item);
+    }
+  });
+}
 
-  const handleOnChangeHours = (event) => {
-    setSelectedHour(event.currentTarget.value);
-    getCurrentData();
-  }
-
-  return (
-    <>
-      <ButtonGroup className="w-100 mb-4">
-        {days.map((day, idx) => (
-          <ToggleButton
-            key={idx}
-            id={`day-${idx}`}
-            type="radio"
-            variant="outline-primary"
-            name='day'
-            value={day}
-            checked={day === selectedDay}
-            onChange={handleOnChangeDays}
-          >
-            {day}
-          </ToggleButton>
-        ))}
-      </ButtonGroup>
-      <ButtonGroup className="w-100 mb-4">
-        {hours.map((hour, idx) => (
-          <ToggleButton
-            key={idx}
-            id={`hour-${idx}`}
-            type="radio"
-            variant="outline-primary"
-            name='hour'
-            value={hour}
-            checked={hour === selectedHour}
-            onChange={handleOnChangeHours}
-          >
-            {hour}
-          </ToggleButton>
-        ))}
-      </ButtonGroup>
-      <Data data={currentData} />
-    </>
-  );
+return (
+  <>
+    <ButtonGroup className="w-100 mb-4">
+      {days.map((day, idx) => (
+        <ToggleButton
+          key={idx}
+          id={`day-${idx}`}
+          type="radio"
+          variant="outline-primary"
+          name='day'
+          value={day}
+          checked={day === selectedDay}
+          onChange={handleOnChangeDays}
+        >
+          {day}
+        </ToggleButton>
+      ))}
+    </ButtonGroup>
+    <ButtonGroup className="w-100 mb-4">
+      {hours.map((hour, idx) => (
+        <ToggleButton
+          key={idx}
+          id={`hour-${idx}`}
+          type="radio"
+          variant="outline-primary"
+          name='hour'
+          value={hour}
+          checked={hour === selectedHour}
+          onChange={handleOnChangeHours}
+        >
+          {hour}
+        </ToggleButton>
+      ))}
+    </ButtonGroup>
+    <Data data={currentData} />
+  </>
+);
 }
 
 export default TimeSelector;
