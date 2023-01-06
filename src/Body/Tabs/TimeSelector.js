@@ -1,8 +1,8 @@
-import { useState, useEffect, useCallback } from 'react';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import ToggleButton from 'react-bootstrap/ToggleButton';
-import Data from './Data';
-import moment from 'moment';
+import { useState, useEffect, useCallback } from "react";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import ToggleButton from "react-bootstrap/ToggleButton";
+import Data from "./Data";
+import moment from "moment";
 
 function TimeSelector({ data }) {
   const [selectedDay, setSelectedDay] = useState(0);
@@ -13,17 +13,20 @@ function TimeSelector({ data }) {
 
   const [currentData, setCurrentData] = useState(null);
 
-  const getCurrentData = useCallback((cbFn) => {
-    data?.list.forEach(item => {
-      const timestamp = item.dt;
-      const momentDate = moment.unix(timestamp);
+  const getCurrentData = useCallback(
+    (cbFn) => {
+      data?.list.forEach((item) => {
+        const timestamp = item.dt;
+        const momentDate = moment.unix(timestamp);
 
-      const day = momentDate.format('DD');
-      const hour = momentDate.format('HH:mm');
+        const day = momentDate.format("DD");
+        const hour = momentDate.format("HH:mm");
 
-      cbFn(item, day, hour);
-    });
-  }, [data]);
+        cbFn(item, day, hour);
+      });
+    },
+    [data]
+  );
 
   useEffect(() => {
     const days = [];
@@ -33,7 +36,6 @@ function TimeSelector({ data }) {
       if (!days.includes(day)) {
         days.push(day);
       }
-
       if (!hours.includes(hour)) {
         hours.push(hour);
       }
@@ -53,7 +55,9 @@ function TimeSelector({ data }) {
 
     getCurrentData((item, day, hour) => {
       if (event.currentTarget.value === days[0]) {
-        const firstActiveHour = hours.find(hour => !checkDatePast(day[0], hour));
+        const firstActiveHour = hours.find(
+          (hour) => !checkDatePast(days[0], hour)
+        );
         if (event.currentTarget.value === day && firstActiveHour === hour) {
           setSelectedHour(firstActiveHour);
           setCurrentData(item);
@@ -73,20 +77,21 @@ function TimeSelector({ data }) {
         setCurrentData(item);
       }
     });
-  }
+  };
 
-  const checkDatePast = (day, hour) => moment().unix() > moment(`${day} ${hour}`, 'DD HH:mm').unix();
+  const checkDatePast = (day, hour) =>
+    moment().unix() > moment(`${day} ${hour}`, "DD HH:mm").unix();
 
   return (
     <>
-      <ButtonGroup className="w-100 mb-4">
+      <ButtonGroup className="w-100">
         {days.map((day, idx) => (
           <ToggleButton
             key={idx}
             id={`day-${idx}`}
             type="radio"
             variant="outline-primary"
-            name='day'
+            name="day"
             value={day}
             checked={day === selectedDay}
             onChange={handleOnChangeDays}
@@ -95,18 +100,18 @@ function TimeSelector({ data }) {
           </ToggleButton>
         ))}
       </ButtonGroup>
-      <ButtonGroup className="w-100 mb-4">
+      <ButtonGroup className="w-100">
         {hours.map((hour, idx) => (
           <ToggleButton
             key={idx}
             id={`hour-${idx}`}
             type="radio"
             variant="outline-primary"
-            name='hour'
+            name="hour"
             value={hour}
             checked={hour === selectedHour}
             onChange={handleOnChangeHours}
-            disabled={ checkDatePast(days[0], hour) && selectedDay === days[0]}
+            disabled={checkDatePast(days[0], hour) && selectedDay === days[0]}
           >
             {hour}
           </ToggleButton>
