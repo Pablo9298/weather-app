@@ -21,5 +21,5 @@ export async function getForecast(data = null) {
     ...(data || defaultSearchParams),
     appid: apiKey,
   });
-   return await fetch(`${apiUrl}/forecast?${params}`);
+  return await fetch(`${apiUrl}/forecast?${params}`);
 }

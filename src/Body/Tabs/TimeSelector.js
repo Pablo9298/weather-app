@@ -39,70 +39,82 @@ function TimeSelector({ data }) {
       }
     });
 
-  setDays(days);
-  setHours(hours);
-  setSelectedDay(days[0]);
-  setSelectedHour(hours[0]);
-  if (data) {
-    setCurrentData(data.list[0]);
+    setDays(days);
+    setHours(hours.sort());
+    setSelectedDay(days[0]);
+    setSelectedHour(hours[0]);
+    if (data) {
+      setCurrentData(data.list[0]);
+    }
+  }, [data, getCurrentData]);
+
+  const handleOnChangeDays = (event) => {
+    setSelectedDay(event.currentTarget.value);
+
+    getCurrentData((item, day, hour) => {
+      if (event.currentTarget.value === days[0]) {
+        const firstActiveHour = hours.find(hour => !checkDatePast(day[0], hour));
+        if (event.currentTarget.value === day && firstActiveHour === hour) {
+          setSelectedHour(firstActiveHour);
+          setCurrentData(item);
+        }
+      } else {
+        if (event.currentTarget.value === day && selectedHour === hour) {
+          setCurrentData(item);
+        }
+      }
+    });
+  };
+
+  const handleOnChangeHours = (event) => {
+    setSelectedHour(event.currentTarget.value);
+    getCurrentData((item, day, hour) => {
+      if (selectedDay === day && event.currentTarget.value === hour) {
+        setCurrentData(item);
+      }
+    });
   }
-}, [data, getCurrentData]);
 
-const handleOnChangeDays = (event) => {
-  setSelectedDay(event.currentTarget.value);
-  getCurrentData((item, day, hour) => {
-    if (selectedDay === day && selectedHour === hour) {
-      setCurrentData(item);
-    }
-  });
-}
+  const checkDatePast = (day, hour) => moment().unix() > moment(`${day} ${hour}`, 'DD HH:mm').unix();
 
-const handleOnChangeHours = (event) => {
-  setSelectedHour(event.currentTarget.value);
-  getCurrentData((item, day, hour) => {
-    if (selectedDay === day && selectedHour === hour) {
-      setCurrentData(item);
-    }
-  });
-}
-
-return (
-  <>
-    <ButtonGroup className="w-100 mb-4">
-      {days.map((day, idx) => (
-        <ToggleButton
-          key={idx}
-          id={`day-${idx}`}
-          type="radio"
-          variant="outline-primary"
-          name='day'
-          value={day}
-          checked={day === selectedDay}
-          onChange={handleOnChangeDays}
-        >
-          {day}
-        </ToggleButton>
-      ))}
-    </ButtonGroup>
-    <ButtonGroup className="w-100 mb-4">
-      {hours.map((hour, idx) => (
-        <ToggleButton
-          key={idx}
-          id={`hour-${idx}`}
-          type="radio"
-          variant="outline-primary"
-          name='hour'
-          value={hour}
-          checked={hour === selectedHour}
-          onChange={handleOnChangeHours}
-        >
-          {hour}
-        </ToggleButton>
-      ))}
-    </ButtonGroup>
-    <Data data={currentData} />
-  </>
-);
+  return (
+    <>
+      <ButtonGroup className="w-100 mb-4">
+        {days.map((day, idx) => (
+          <ToggleButton
+            key={idx}
+            id={`day-${idx}`}
+            type="radio"
+            variant="outline-primary"
+            name='day'
+            value={day}
+            checked={day === selectedDay}
+            onChange={handleOnChangeDays}
+          >
+            {day}
+          </ToggleButton>
+        ))}
+      </ButtonGroup>
+      <ButtonGroup className="w-100 mb-4">
+        {hours.map((hour, idx) => (
+          <ToggleButton
+            key={idx}
+            id={`hour-${idx}`}
+            type="radio"
+            variant="outline-primary"
+            name='hour'
+            value={hour}
+            checked={hour === selectedHour}
+            onChange={handleOnChangeHours}
+            disabled={ checkDatePast(days[0], hour) && selectedDay === days[0]}
+          >
+            {hour}
+          </ToggleButton>
+        ))}
+      </ButtonGroup>
+      <Data data={currentData} />
+    </>
+  );
 }
 
 export default TimeSelector;
