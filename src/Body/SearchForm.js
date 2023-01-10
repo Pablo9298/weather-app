@@ -1,9 +1,17 @@
+import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import FormGroup from 'react-bootstrap/FormGroup';
 import { getWeather, defaultSearchParams } from '../services/apiService';
 
-function SearchForm() {
+function SearchForm({ handleCloseBar, setWeatherData }) {
+
+  const cities = [
+    { label: 'Tallinn', lat: 59.436962, lon: 24.753574 },
+    { label: 'Tartu', lat: 58.378025, lon: 26.728493 },
+    { label: 'Parnu', lat: 58.385808, lon: 24.496577 },
+    { label: 'Kuressaare', lat: 58.24806, lon: 22.50389 },
+  ];
 
   const units = [
     'standart',
@@ -19,32 +27,63 @@ function SearchForm() {
     { code: 'zh_cn', label: 'Chinese Simplified' },
   ];
 
+  const [selectedCity, setSelectedCity] = useState(null);
+
+  const handleCitySelect = (event) => {
+    const selectedCityObject = cities.find((city) =>
+      city.label === event.target.value
+    );
+    setSelectedCity(selectedCityObject);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(event);
 
-    const data = {
+    const params = {
       lat: event.target.lat.value,
       lon: event.target.lon.value,
       units: event.target.units.value,
       lang: event.target.lang.value,
     };
 
-    const weather = await getWeather(data);
-    const response = await weather.json();
-    console.log('response', response);
-  }
+    const response = await getWeather(params);
+    const data = await response.json();
+
+    setWeatherData(data);
+    handleCloseBar();
+  };
 
   return (
     <Form onSubmit={handleSubmit}>
+      <FormGroup className="my-4">
+        <Form.Label>City</Form.Label>
+        <Form.Select name="city" defaultValue={cities[0]} onChange={handleCitySelect}>
+          {cities.map((city, i) => (
+            <option key={city.label} value={city.label}>{city.label}</option>
+          ))}
+        </Form.Select>
+      </FormGroup>
+
       <Form.Group className="mb-4">
         <Form.Label>Latitude</Form.Label>
-        <Form.Control type="text" name="lat" placeholder="41.9418284" defaultValue={defaultSearchParams.lat} />
+        <Form.Control
+          type="text"
+          name="lat"
+          placeholder="41.9418284"
+          value={selectedCity?.lat || defaultSearchParams.lat}
+          onChange={() => { }}
+        />
       </Form.Group>
 
       <Form.Group className="mb-4">
         <Form.Label>Longetude</Form.Label>
-        <Form.Control type="text" name="lon" placeholder="2.17403322" defaultValue={defaultSearchParams.lon} />
+        <Form.Control
+          type="text"
+          name="lon"
+          placeholder="2.17403322"
+          value={selectedCity?.lon || defaultSearchParams.lon}
+          onChange={() => { }}
+        />
       </Form.Group>
 
       <FormGroup>
