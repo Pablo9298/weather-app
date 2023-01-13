@@ -11,11 +11,12 @@ function Map({ weatherData }) {
     lat: weatherData?.coord.lat || defaultSearchParams.lat,
     lng: weatherData?.coord.lon || defaultSearchParams.lon,
   };
+
   return (
     <>
       {isLoaded && (
         <GoogleMap
-          mapContainerStyle={{ height: "600px", width: "100%" }}
+          mapContainerStyle={{ height: "500px", width: "100%" }}
           center={center}
           zoom={10}
         >

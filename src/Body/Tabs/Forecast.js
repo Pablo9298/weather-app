@@ -4,7 +4,6 @@ import Map from "./Map";
 import { getForecast } from "../../services/apiService";
 
 function Forecast() {
-
   const [forecastData, setForecastData] = useState(null);
   const [currentData, setCurrentData] = useState(null);
 
@@ -13,13 +12,17 @@ function Forecast() {
       const response = await getForecast();
       const data = await response.json();
       setForecastData(data);
-    })()
+    })();
   }, []);
 
   return (
     <>
-      <TimeSelector currentData={currentData} setCurrentData={setCurrentData} data={forecastData} />
-      <Map weatherData={currentData}/>
+      <TimeSelector
+        currentData={currentData}
+        setCurrentData={setCurrentData}
+        data={forecastData}
+      />
+      <Map weatherData={currentData} />
     </>
   );
 }

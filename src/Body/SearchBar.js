@@ -1,6 +1,6 @@
-import Offcanvas from 'react-bootstrap/Offcanvas';
-import SearchForm from './SearchForm';
-import ExportDataForm from './ExportDataForm';
+import Offcanvas from "react-bootstrap/Offcanvas";
+import ExportDataForm from "./ExportDataForm";
+import SearchForm from "./SearchForm";
 
 function SearchBar({ show, handleClose, setWeatherData }) {
   return (
@@ -9,7 +9,10 @@ function SearchBar({ show, handleClose, setWeatherData }) {
         <Offcanvas.Title>Search</Offcanvas.Title>
       </Offcanvas.Header>
       <Offcanvas.Body>
-        <SearchForm handleCloseBar={handleClose} setWeatherData={setWeatherData}/>
+        <SearchForm
+          handleCloseBar={handleClose}
+          setWeatherData={setWeatherData}
+        />
         <ExportDataForm />
       </Offcanvas.Body>
     </Offcanvas>
