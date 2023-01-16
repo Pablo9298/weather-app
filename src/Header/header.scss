@@ -9,6 +9,12 @@
 
   .nav-link {
     color: #5ca6db;
+    transition: all 0.3s;
+
+    &:hover {
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 1px;
+    }
   }
 
   .dropdown-menu {
