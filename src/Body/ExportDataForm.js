@@ -65,7 +65,7 @@ function ExportDataForm() {
             />
           ))}
         </Form.Group>
-        <Button className="w-100 mt-4" variant="warning" type="submit">
+        <Button className="btn-export w-100 mt-4" type="submit">
           Export
         </Button>
       </Form>

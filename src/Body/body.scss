@@ -3,3 +3,53 @@
   height: 500px;
   background-color: aliceblue;
 }
+
+body {
+  background: rgb(241 254 255);
+}
+
+.btn-search {
+  background: #88a9c0;
+  border: transparent;
+  transition: all 0.3s;
+
+  &:hover {
+    letter-spacing: 1px;
+    background: #6198c0;
+  }
+}
+
+.btn-export {
+  background-color: rgb(240, 157, 157);
+  transition: all 0.3s;
+  color: #333;
+
+  &:hover {
+    background-color: rgba(240, 157, 157, 50%);
+    color: #333;
+    letter-spacing: 2px;
+  }
+}
+
+.offcanvas {
+  background: rgb(241 254 255);
+}
+
+.btn {
+  border: 1px solid #6198c0;
+}
+
+.btn-check:checked+.btn {
+  background: #88a9c0;
+  border: 1px solid #6198c0;
+}
+
+.nav-tabs .nav-link.active {
+  background: #aecce1;
+}
+
+.form-control,
+.form-select {
+  background-color: #94b3c9;
+  color: #fff;
+}

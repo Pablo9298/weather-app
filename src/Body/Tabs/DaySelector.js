@@ -46,7 +46,7 @@ function DaySelector({
 
   return (
     <>
-      <ButtonGroup className="w-100">
+      <ButtonGroup className="w-100 mb-3">
         {days.map((day, idx) => (
           <ToggleButton
             key={idx}

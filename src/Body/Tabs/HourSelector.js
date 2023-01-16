@@ -18,7 +18,7 @@ function HourSelector({ setCurrentData, hours }) {
   };
 
   return (
-    <ButtonGroup className="w-100">
+    <ButtonGroup className="w-100 mb-4">
       {hours.map(({ hour, item }, idx) => (
         <ToggleButton
           key={idx}

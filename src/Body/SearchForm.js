@@ -110,7 +110,7 @@ function SearchForm({ handleCloseBar, setWeatherData }) {
         </Form.Select>
       </FormGroup>
 
-      <Button className='w-100' variant="primary" type="submit">
+      <Button className='btn-search w-100' type="submit">
         Submit
       </Button>
     </Form>

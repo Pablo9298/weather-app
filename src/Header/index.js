@@ -2,10 +2,11 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import './header.scss';
 
 function Header() {
   return (
-    <Navbar bg="light" expand="lg" className="mb-4">
+    <Navbar expand="lg" className="navbar mb-4">
       <Container>
         <Navbar.Brand href="#home">Weather</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

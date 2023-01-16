@@ -17,7 +17,7 @@ function Body() {
 
   return (
     <>
-      <Button className="mb-4" variant="primary" onClick={handleShowBar}>
+      <Button className="btn-search mb-4" onClick={handleShowBar}>
         Search
       </Button>
       <SearchBar
