@@ -16,17 +16,27 @@ body {
   &:hover {
     letter-spacing: 1px;
     background: #6198c0;
+    box-shadow: 6px 3px 9px 0px #abb7b5;
+  }
+}
+
+.nav-link {
+  color: #333;
+  transition: all 0.3s;
+
+  &:hover {
+    color:#408dc4;
   }
 }
 
 .btn-export {
-  background-color: rgb(240, 157, 157);
+  background-color: rgb(238, 168, 168);
   transition: all 0.3s;
   color: #333;
 
   &:hover {
-    background-color: rgba(240, 157, 157, 50%);
-    color: #333;
+    background-color: rgba(247, 32, 32, 0.5);
+    color: #fff;
     letter-spacing: 2px;
   }
 }
@@ -37,6 +47,7 @@ body {
 
 .btn {
   border: 1px solid #6198c0;
+  color: #333;
 }
 
 .btn-check:checked+.btn {

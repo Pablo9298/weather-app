@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import LifeComponent from './Life';
+import LifeComponent from '../Life';
 
 const TestArrow = (props) => {
   console.log('TestArrow');

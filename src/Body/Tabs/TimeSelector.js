@@ -1,9 +1,8 @@
-import { useEffect, useCallback } from "react";
-import Data from "./Data";
+import { useCallback } from "react";
 import moment from "moment";
 import DaySelector from "./DaySelector";
 
-function TimeSelector({ data, currentData, setCurrentData }) {
+function TimeSelector({ data }) {
 
   const getCurrentData = useCallback(
     (cbFn) => {
@@ -20,24 +19,12 @@ function TimeSelector({ data, currentData, setCurrentData }) {
     [data]
   );
 
-  useEffect(() => {
-    if (data) {
-      setCurrentData({
-        ...data.list[0],
-        coord: data.city.coord,
-      });
-    }
-  }, [data, getCurrentData, setCurrentData]);
-
   return (
     <>
       <DaySelector
-        setCurrentData={setCurrentData}
         data={data}
         getCurrentData={getCurrentData}
       />
-
-      <Data data={currentData} />
     </>
   );
 }
