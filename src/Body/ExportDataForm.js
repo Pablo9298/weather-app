@@ -11,7 +11,13 @@ function ExportDataForm() {
   const modes = ['json', 'html', 'xml'];
   const endpoints = ['Current', 'Forecast'];
 
+  // Obrabotchik eventa eto prosto funkcija kotoraja prinimaet kak argument object sobitija
+  // i prinjato nazivatj obrabotchaki s slova 'handle'.
+  // v event objecte peradaetsja element s kotorim proizoshlo sobitie,hranitsja ono v svoistve 'target'.
+  //
   const handleSubmit = (event) => {
+    // preventDefaul eto funkcija kotoraja otklju4aet deistvie sobitija kotoroe u nego po umolchaniju.
+    // Primer: distvie u onSubmit po umolchaniju otpravka dannih na server. 4erez GET method.  
     event.preventDefault();
 
     const mode = event.target.mode.value;
@@ -40,6 +46,13 @@ function ExportDataForm() {
         dispatch(setErrorMessage(error.message));
       });
   };
+
+  // onSubmit eto slushatelj sobitija i trigger obrabot4ika
+  // vse 4to delaet polzovatelj na nashem saite vse javljajetsja sobitiem
+  // Polzovatelj 4toto sdelal a brauzer peredal eto nashemu proektu.
+  // V nashem proekte slushateli zapuskajut obrabot4iki sobitij 
+  // brauzer peredaet nam object s dannimi dannogo sobitija (event)
+  // estj ogromnoe koli4estvo slushatelej i vse nazvanija nachinajutsja s slova 'on'.
 
   return (
     <>

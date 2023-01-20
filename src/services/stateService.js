@@ -1,5 +1,9 @@
 import { createAction, createReducer, configureStore } from '@reduxjs/toolkit'
 
+// redux eto state obrabot4ik dlja raznih bibliotek.
+// osnovi redux o4enj shozhi s react state.
+// Kak i u useState u redux estj iznachalnoe sostojanie i funkcija dlja izmenenija sostojanija
+
 const initialState = {
   showSearchBar: false,
   searchParams: {
@@ -13,11 +17,17 @@ const initialState = {
   errorMessage: null,
 };
 
+
+// Funkcii izmenenija sostojanija v redux nazivajutsja 'Action';
+// Action sozdaet object v kotorom estj ego tip i object payload v kotorom budut hranitsja novie dannie 
 export const setSearchParams = createAction('setSearchParams');
 export const setShowSearchBar = createAction('setShowSearchBar');
 export const setForecastSelectedData = createAction('setForecastSelectedData');
 export const setErrorMessage = createAction('setErrorMessage');
 
+// reducer ispolzuetsja dlja opredelenija chto budet delatj 'Action'
+// Mi sozdaem funkcii s nazvaniem Actiona i v kotorih opisivaem 4to proizoidet
+// V nashem slu4ae mi menjajem sostojanie.
 const reducer = createReducer(initialState, {
   [setSearchParams]: (iState, action) => {
     iState.searchParams = action.payload;
@@ -33,5 +43,6 @@ const reducer = createReducer(initialState, {
   },
 });
 
+//store eto oblako gde hranitsja vsja informacija o sostojanii.
 export const store = configureStore({ reducer });
 

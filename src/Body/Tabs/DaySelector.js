@@ -12,6 +12,16 @@ function DaySelector({
   const [days, setDays] = useState([]);
   const [hours, setHours] = useState([]);
 
+
+  // useEffect eto react hook kotorij pomogaet rabotatj s dannqmi komponenta
+  // on zapuskaetsja srazy posle togo kak komponent zakon4it otrisovku/render.
+  // tak zhe useEffect prinimaet massiv s zavisimostimi kotorie mogut kontrolirovatj zapusk useEffect.
+  // Esli odin iz zavisimosti pomenjajet zna4enie to useEffect zapuskaetsja.
+  // useEffect ne zapuskaet novuju otrisovku.No garantiruet 4to esli vnutri nego menjajut sostojanie
+  // to otrisovka proizoidet tolko 1 raz.
+  // Esli datj pustoi spisok zavisimoistei [], to useEffect sraboatetolko odin raz posle pervoi otrisovki 
+  // komponenta i bolwe nikogda.
+
   useEffect(() => {
     const firstDay = moment.unix(data?.list[0].dt).format("DD");
     setSelectedDay(firstDay);
