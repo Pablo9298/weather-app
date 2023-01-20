@@ -10,7 +10,7 @@ const initialState = {
     city: 'Tallinn',
   },
   forecastSelectedData: null,
-  errorMessage: null
+  errorMessage: null,
 };
 
 export const setSearchParams = createAction('setSearchParams');
