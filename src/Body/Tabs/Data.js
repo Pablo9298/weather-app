@@ -11,14 +11,14 @@ function Data({ data }) {
         </tr>
         <tr>
           <td><b>Main</b></td>
-          <td>{data?.main.feels_like}</td>
-          <td>{data?.main.temp}</td>
-          <td>{data?.main.temp_min}</td>
-          <td>{data?.main.temp_max}</td>
+          <td>{!isNaN(data?.main.feels_like) ? Math.ceil(data?.main.feels_like) : '-'}</td>
+          <td>{!isNaN(data?.main.temp) ? Math.ceil(data?.main.temp) : '-'}</td>
+          <td>{!isNaN(data?.main.temp_min) ? Math.ceil(data?.main.temp_min) : '-'}</td>
+          <td>{!isNaN(data?.main.temp_max) ? Math.ceil(data?.main.temp_max) : '-'}</td>
         </tr>
         <tr>
           <td><b>Wind</b></td>
-          <td>{data?.wind.speed}</td>
+          <td>{!isNaN(data?.wind.speed) ? Math.ceil(data?.wind.speed) : '-'}</td>
         </tr>
       </tbody>
     </Table>

@@ -21,7 +21,7 @@ function Map({ weatherData }) {
           zoom={10}
         >
           <InfoWindow position={center}>
-            <div>{weatherData?.main.temp}</div>
+            <div>{!isNaN(weatherData?.main.temp) ? Math.ceil(weatherData?.main.temp) : '-'}</div>
           </InfoWindow>
         </GoogleMap>
       )}
