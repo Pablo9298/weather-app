@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import ToggleButton from "react-bootstrap/ToggleButton";
-import HourSelector from "./HourSelector";
-import moment from "moment";
+import { useState, useEffect } from 'react';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import ToggleButton from 'react-bootstrap/ToggleButton';
+import HourSelector from './HourSelector';
+import moment from 'moment';
 
 function DaySelector({
   data,

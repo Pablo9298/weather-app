@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import TimeSelector from "./TimeSelector";
-import Data from "./Data";
-import Map from "./Map";
-import { getForecast } from "../../services/apiService";
-import { useSelector, useDispatch } from "react-redux";
-import { setErrorMessage } from "../../services/stateService";
+import { useEffect, useState } from 'react';
+import TimeSelector from './TimeSelector';
+import Data from './Data';
+import Map from './Map';
+import { getForecast } from '../../services/apiService';
+import { useSelector, useDispatch } from 'react-redux';
+import { setErrorMessage } from '../../services/stateService';
 
 function Forecast() {
   const [forecastData, setForecastData] = useState(null);

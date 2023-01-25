@@ -1,8 +1,8 @@
-import Offcanvas from "react-bootstrap/Offcanvas";
-import ExportDataForm from "./ExportDataForm";
-import SearchForm from "./SearchForm";
+import Offcanvas from 'react-bootstrap/Offcanvas';
+import ExportDataForm from './ExportDataForm';
+import SearchForm from './SearchForm';
 import { useSelector, useDispatch } from 'react-redux';
-import { setShowSearchBar } from "../services/stateService";
+import { setShowSearchBar } from '../services/stateService';
 
 function SearchBar() {
 

@@ -1,6 +1,6 @@
-import { useCallback } from "react";
-import moment from "moment";
-import DaySelector from "./DaySelector";
+import { useCallback } from 'react';
+import moment from 'moment';
+import DaySelector from './DaySelector';
 
 function TimeSelector({ data }) {
 

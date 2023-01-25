@@ -6,7 +6,7 @@ import './body.scss';
 import SearchBar from './SearchBar';
 import Forecast from './Tabs/Forecast';
 import { useDispatch } from 'react-redux';
-import { setShowSearchBar } from "../services/stateService";
+import { setShowSearchBar } from '../services/stateService';
 
 function Body() {
 

@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import ToggleButton from "react-bootstrap/ToggleButton";
-import { useDispatch } from "react-redux";
-import { setForecastSelectedData } from "../../services/stateService";
+import { useState, useEffect } from 'react';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import ToggleButton from 'react-bootstrap/ToggleButton';
+import { useDispatch } from 'react-redux';
+import { setForecastSelectedData } from '../../services/stateService';
 
 function HourSelector({ hours }) {
   const [selectedHour, setSelectedHour] = useState(0);

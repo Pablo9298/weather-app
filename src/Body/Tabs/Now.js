@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
-import Map from "./Map";
-import { getWeather } from "../../services/apiService";
-import Data from "./Data";
-import { useSelector, useDispatch } from "react-redux";
+import { useState, useEffect } from 'react';
+import Map from './Map';
+import { getWeather } from '../../services/apiService';
+import Data from './Data';
+import { useSelector, useDispatch } from 'react-redux';
 import { setErrorMessage } from '../../services/stateService';
 
 function Now() {

@@ -1,7 +1,7 @@
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { getWeather, getForecast, defaultSearchParams } from '../services/apiService';
-import { useDispatch } from "react-redux";
+import { useDispatch } from 'react-redux';
 import { setErrorMessage } from './../services/stateService';
 
 function ExportDataForm() {
